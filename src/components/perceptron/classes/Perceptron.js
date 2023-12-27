@@ -6,10 +6,11 @@ function sign (n) {
     };
 }
 
-export  default class Perceptron {
 
+export  default class Perceptron {
+    
     weigths = new Array(2).fill(0); // Ya tenemos el array de los pesos, mejor que como elementos independientes, más flexible
-    lr = 0.01;
+    lr = 0.1;
 
     constructor () {
         for (let i = 0; i < this.weigths.length; i++ ) {

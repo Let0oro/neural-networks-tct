@@ -31,8 +31,8 @@ export default function perceptronP5(p5, h) {
   let points = Array(100).fill(0);
   let brain;
   let trainingIndex = 0;
-  let count = 0;
-  let counter = p5.select('#counter').elt;
+  // let count = 0;
+  // let counter = p5.select('#counter').elt;
 
   p5.setup = function () {
     p5.createCanvas(h, h);
@@ -57,6 +57,11 @@ export default function perceptronP5(p5, h) {
       const target = point.label;
       const guess = brain.guess(inputs);
       if (guess == target) {
+        if (guess > 0) {
+          p5.strokeWeight(1);
+        } else {
+          p5.strokeWeight(2);
+        }
         p5.fill(0, 255, 0);
       } else {
         p5.fill(255, 0, 0);
@@ -68,11 +73,12 @@ export default function perceptronP5(p5, h) {
     const inputs = [training.x, training.y];
     const target = training.label;
     brain.train(inputs, target);
-    counter.innerText = count;
+
+    // counter.innerText = count;
     trainingIndex++;
     if (trainingIndex == points.length) {
         trainingIndex = 0;
-        if (!!!points.every(({x, y, label}) => brain.guess([x, y]) === label)) count++;
+        // if (!!!points.every(({x, y, label}) => brain.guess([x, y]) === label)) count++;
     }
   };
 }

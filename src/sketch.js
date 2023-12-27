@@ -1,5 +1,5 @@
-import perceptron from './components/perceptron.js';
-
+import perceptron from './components/perceptron/perceptron.js';
+import perceptron_2 from './components/perceptron_2/perceptron_2.js';
 
 const ID_COMMON = 'proj';
 let name = '';
@@ -7,8 +7,8 @@ const objVisor = [
   (p, h) => {
     perceptron(p, h);
   },
-  () => {
-     
+  (p, h) => {
+    perceptron_2(p, h);
   },
   () => {
      
@@ -49,7 +49,8 @@ buttons.forEach((button) => {
 
     
     const sketch_visor = (p) => {
-      p5Container.innerHTML = '<h3 id="titleProj"> <span id="counter"></span></h3>';
+      // p5Container.innerHTML = '<h3 id="titleProj"> <span id="counter"></span></h3>';
+      p5Container.innerHTML = '<h3 id="titleProj"></h3>';
       const h = p5Container.clientHeight;
 
       objVisor[idNumber](p, h);
