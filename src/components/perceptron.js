@@ -23,20 +23,56 @@
     ?¿How to choose the weights? -> 
 
  */
+import Perceptron from "./classes/Perceptron.js";
+import Point from "./classes/Point.js";
 
-export default function perceptronP5 (p, w, h) {
+// Activation function
+export default function perceptronP5(p5, h) {
+  let points = Array(100).fill(0);
+  let brain;
+  let trainingIndex = 0;
+  let count = 0;
+  let counter = p5.select('#counter').elt;
 
-    p.setup = function () {
-        p.createCanvas(w, h);
-        p.background(220);
-        console.log('canvas!!')
+  p5.setup = function () {
+    p5.createCanvas(h, h);
+    brain = new Perceptron();
+
+    for (let i = 0; i < points.length; i++) {
+      points[i] = new Point(p5);
     }
 
-    p.draw = function () {
+    const inputs = [-1, 0.5];
+    const guess = brain.guess(inputs);
+    p5.smooth();
+  };
 
+  p5.draw = function () {
+    p5.background(255);
+    p5.stroke(0);
+    p5.line(0, 0, p5.width, p5.height);
+
+    for (let point of points) {
+      const inputs = [point.x, point.y];
+      const target = point.label;
+      const guess = brain.guess(inputs);
+      if (guess == target) {
+        p5.fill(0, 255, 0);
+      } else {
+        p5.fill(255, 0, 0);
+      }
+      point.show(point, 8);
     }
 
+    let training = points[trainingIndex];
+    const inputs = [training.x, training.y];
+    const target = training.label;
+    brain.train(inputs, target);
+    counter.innerText = count;
+    trainingIndex++;
+    if (trainingIndex == points.length) {
+        trainingIndex = 0;
+        if (!!!points.every(({x, y, label}) => brain.guess([x, y]) === label)) count++;
+    }
+  };
 }
-
-  
-    

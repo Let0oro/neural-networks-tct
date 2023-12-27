@@ -101,6 +101,7 @@ section.visor {
   & #visor {
     height: 100%;
     width: 100%;
+    text-align: center;
   }
 }
 

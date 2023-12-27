@@ -1,11 +1,11 @@
-import perceptron from './components/perceptron';
+import perceptron from './components/perceptron.js';
 
 
 const ID_COMMON = 'proj';
 let name = '';
 const objVisor = [
-  (p, w, h) => {
-    perceptron(p, w, h);
+  (p, h) => {
+    perceptron(p, h);
   },
   () => {
      
@@ -25,6 +25,7 @@ const objVisor = [
 ];
 
 const title = document.getElementById('titleProj');
+export const counter = document.getElementById('counter');
 const buttons = document.querySelectorAll('.open-proj');
 const p5Container = document.getElementById('visor');
 
@@ -35,6 +36,8 @@ buttons.forEach((button) => {
     e.preventDefault();
     const elem = e.target;
     const idNumber = +elem.id.match(/[0-9]/)-1;
+    const newTitle = elem.parentElement.firstElementChild.textContent;
+    title.innerText = newTitle;
 
     (function changeCurrent () {
       const currentButton = currentActiveButton();
@@ -46,11 +49,10 @@ buttons.forEach((button) => {
 
     
     const sketch_visor = (p) => {
-      p5Container.innerHTML = '<h3 id="titleProj"></h3>';
-      const w = p5Container.clientWidth;
+      p5Container.innerHTML = '<h3 id="titleProj"> <span id="counter"></span></h3>';
       const h = p5Container.clientHeight;
 
-      objVisor[idNumber](p, w, h);
+      objVisor[idNumber](p, h);
     }
     new p5(sketch_visor, 'visor')
 
