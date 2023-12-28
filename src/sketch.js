@@ -10,8 +10,8 @@ const objVisor = [
   (p, h) => {
     perceptron_2(p, h);
   },
-  () => {
-     
+  (p, h) => {
+    multilayer(p, h);
   },
   () => {
      
@@ -51,7 +51,8 @@ buttons.forEach((button) => {
     const sketch_visor = (p) => {
       // p5Container.innerHTML = '<h3 id="titleProj"> <span id="counter"></span></h3>';
       p5Container.innerHTML = '<h3 id="titleProj"></h3>';
-      const h = p5Container.clientHeight;
+      let h = p5Container.clientHeight;
+      h = p5Container.clientWidth > h ? h : p5Container.clientWidth;
 
       objVisor[idNumber](p, h);
     }
